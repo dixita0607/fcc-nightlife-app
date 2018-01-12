@@ -1,0 +1,9 @@
+<div>
+  {{restaurant.name}}
+  <button type="button" (click)="visit()">
+    <span>
+      {{authService.user ? (restaurant.stats.visiting ? 'Cancel visit' : 'Visit') : 'Login'}} |
+      {{restaurant.stats.count}}
+    </span>
+  </button>
+</div>
