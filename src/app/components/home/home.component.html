@@ -1,11 +1,11 @@
-<div>
+<div class="home-container">
   <form [formGroup]="form">
-    <div>
-      <input type="text" formControlName="city" #city>
+    <div class="search-box">
+      <input type="text" formControlName="city" placeholder="City" #city>
       <button type="submit" (click)="findRestaurants(city.value)" [disabled]="!city.value">Search</button>
     </div>
-    <div>
-      <fcc-restaurant-list [restaurants]="restaurants" (visited)="onVisited()"></fcc-restaurant-list>
-    </div>
   </form>
+  <div class="restaurant-list-container">
+    <fcc-restaurant-list [restaurants]="restaurants" (visited)="onVisited()"></fcc-restaurant-list>
+  </div>
 </div>

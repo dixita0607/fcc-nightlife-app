@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {RestaurantService} from "../../services/restaurant.service";
-import {Router} from "@angular/router";
 import {Restaurant} from "../../models/restaurant";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'fcc-restaurant',
@@ -18,8 +18,11 @@ export class RestaurantComponent implements OnInit {
   visited: EventEmitter<null> = new EventEmitter<null>();
 
   visiting: boolean = false;
+  restaurantImage: string = "../../../assets/images/knife-fork.jpeg";
 
-  constructor(public authService: AuthService, private restaurantService: RestaurantService, private router: Router) {
+  constructor(public authService: AuthService,
+              private restaurantService: RestaurantService,
+              private toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -28,8 +31,11 @@ export class RestaurantComponent implements OnInit {
   visit() {
     if (this.authService.user) {
       this.restaurantService.visit(this.restaurant.id, !this.restaurant.stats.visiting).subscribe(
-        response => this.visited.emit(),
-        error => console.log(error)
+        response => {
+          this.toastService.showToast(!this.restaurant.stats.visiting ? 'Visiting.' : 'Visit cancelled.');
+          this.visited.emit();
+        },
+        error => this.toastService.showToast('Could not visit.', true)
       )
     } else {
       window.location.href = '/api/auth/twitter';

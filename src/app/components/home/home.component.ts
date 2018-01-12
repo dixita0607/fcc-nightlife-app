@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {RestaurantService, RestaurantServiceResponse} from "../../services/restaurant.service";
 import {Restaurant} from "../../models/restaurant";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'fcc-home',
@@ -14,7 +15,9 @@ export class HomeComponent implements OnInit {
   restaurants: Restaurant[];
   hasSessionStorage: boolean;
 
-  constructor(private fb: FormBuilder, private restaurantService: RestaurantService) {
+  constructor(private fb: FormBuilder,
+              private restaurantService: RestaurantService,
+              private toastService: ToastService) {
     this.hasSessionStorage = !!window.sessionStorage;
   }
 
@@ -35,7 +38,7 @@ export class HomeComponent implements OnInit {
         this.form.controls['city'].setValue(response.city);
         if (this.hasSessionStorage) sessionStorage.setItem('city', response.city);
       },
-      error => console.log(error)
+      error => this.toastService.showToast('Could not find restaurants nearby.', true)
     )
   }
 

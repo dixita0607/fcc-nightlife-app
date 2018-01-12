@@ -1,9 +1,29 @@
-<div>
-  {{restaurant.name}}
-  <button type="button" (click)="visit()">
-    <span>
-      {{authService.user ? (restaurant.stats.visiting ? 'Cancel visit' : 'Visit') : 'Login'}} |
-      {{restaurant.stats.count}}
-    </span>
-  </button>
+<div class="restaurant-container">
+  <div class="restaurant">
+    <div class="header">
+      {{restaurant.name}}
+    </div>
+    <div class="content">
+      <div class="image">
+        <img src="{{restaurant.thumb || restaurantImage}}" alt="Restaurant image">
+      </div>
+      <div class="information">
+        <div>{{restaurant.cuisines}}</div>
+        <div>Average cost for two: {{restaurant.currency}} {{restaurant.average_cost_for_two}}</div>
+      </div>
+    </div>
+    <div class="footer">
+      <button type="button" (click)="visit()">
+        <span>
+          {{authService.user ? (restaurant.stats.visiting ? 'Cancel visit' : 'Visit') : 'Login to visit'}} -
+          {{restaurant.stats.count}}
+        </span>
+      </button>
+      <a href="{{restaurant.url}}" target="_blank">
+        <button type="button" class="inverted-button">
+          Zomato
+        </button>
+      </a>
+    </div>
+  </div>
 </div>

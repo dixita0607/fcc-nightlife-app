@@ -10,8 +10,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {
     this.httpClient.get(`${this.baseUrl}/user`).subscribe(
-      (user: User) => this.user = user,
-      error => console.log(error)
+      (user: User) => this.user = user
     );
   }
 

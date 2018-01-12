@@ -11,6 +11,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {RestaurantListComponent} from './components/restaurant-list/restaurant-list.component';
 import {RestaurantComponent} from './components/restaurant/restaurant.component';
 import {AuthService} from "./services/auth.service";
+import {ToastService} from "./services/toast.service";
+import {ToastComponent} from './components/toast/toast.component';
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import {AuthService} from "./services/auth.service";
     AppComponent,
     HomeComponent,
     RestaurantListComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import {AuthService} from "./services/auth.service";
   ],
   providers: [
     AuthService,
-    RestaurantService
+    RestaurantService,
+    ToastService
   ],
   bootstrap: [AppComponent]
 })

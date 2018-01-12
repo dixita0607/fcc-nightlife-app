@@ -1,4 +1,4 @@
-<div *ngIf="restaurants">
+<div *ngIf="restaurants" class="restaurants">
   <div *ngFor="let restaurant of restaurants">
     <fcc-restaurant [restaurant]="restaurant" (visited)="onVisited()"></fcc-restaurant>
   </div>
